@@ -1,0 +1,53 @@
+import datetime
+
+class Client:
+  number_of_clients = 0
+
+  def __init__(self, id, name, surname):
+    self.id = id
+    self.name = name
+    self.surname = surname
+    self.items = []
+    Client.number_of_clients += 1
+
+  def add_item(self, item):
+    self.items.append(item)
+
+class Item:
+  number_of_items = 0
+
+  def __init__(self, item, price, units):
+    self.item = item
+    self.price = price
+    self.units = units
+    self.subtotal = self.price * self.units
+    self.transactions = []
+    Item.number_of_items += 1
+
+class Transaction:
+  def __init__(self, currency, value):
+    self.currency = currency
+    self.value = value
+    self.time_stamp = datetime.datetime.now()
+
+ 
+ 
+clients = []
+clients.append(Client('0001', 'Laura', 'Smita'))
+clients.append(Client('0002', 'Baiba', 'Auzina'))
+clients.append(Client('0003', 'Janis', 'Berzins'))
+
+
+clients[0].add_item(Item('jeans', 39.99, 1))
+clients[0].add_item(Item('T-shirt', 9.99, 2))
+clients[1].add_item(Item('jeans', 79.00, 1))
+clients[1].add_item(Item('dress', 105.50, 1))
+clients[2].add_item(Item('T-shirt', 15.00, 1))
+clients[2].add_item(Item('slippers', 80.00, 1))
+
+print(f'We have {Client.number_of_clients} clients in our online shop.')
+
+for client in clients:
+  print(f'Client {client.name} {client.surname} bought: ')
+  for item in client.items:
+    print(f' {item.item} {item.units} for {item.subtotal} ')
